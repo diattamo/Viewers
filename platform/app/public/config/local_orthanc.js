@@ -13,7 +13,8 @@ window.config = {
   showWarningMessageForCrossOrigin: true,
   showCPUFallbackMessage: true,
   strictZSpacingForVolumeViewport: true,
-  // filterQueryParam: false,
+  investigationalUseDialog: { option: 'never' },
+  filterQueryParam: false,
   defaultDataSourceName: 'orthanc',
   dataSources: [
     {
@@ -21,10 +22,10 @@ window.config = {
       sourceName: 'orthanc',
       configuration: {
         friendlyName: 'local Orthanc DICOMWeb Server',
-        name: 'DCM4CHEE',
-        wadoUriRoot: 'http://localhost/dicom-web',
-        qidoRoot: 'http://localhost/dicom-web',
-        wadoRoot: 'http://localhost/dicom-web',
+        name: 'orthanc',
+        wadoUriRoot: 'http://localhost/wado',
+        qidoRoot: 'http://localhost/pacs/dicom-web',
+        wadoRoot: 'http://localhost/pacs/dicom-web',
         qidoSupportsIncludeField: true,
         supportsReject: true,
         imageRendering: 'wadors',
@@ -32,7 +33,7 @@ window.config = {
         enableStudyLazyLoad: true,
         supportsFuzzyMatching: true,
         supportsWildcard: true,
-        dicomUploadEnabled: true,
+        dicomUploadEnabled: false,
         omitQuotationForMultipartRequest: true,
         bulkDataURI: {
           enabled: true,
@@ -161,4 +162,26 @@ window.config = {
       keys: ['9'],
     },
   ],
+  whiteLabeling: {
+    createLogoComponentFn: function (React) {
+      return React.createElement(
+        'a',
+        {
+          target: '_self',
+          rel: 'noopener noreferrer',
+          className: 'text-white underline',
+          href: '/',
+        },
+        React.createElement('img', {
+          src: './IMG_8349.PNG',
+          alt: 'KangamHealth®',
+          style: {
+            height: '60px',
+            width: '60px',
+            margin: '0 10px',
+          },
+        })
+      );
+    },
+  },
 };
